@@ -1,12 +1,22 @@
-{% load cms_tags sekizai_tags %}
+{% load cms_tags sekizai_tags static %}
 <html>
     <head>
+        <meta charset="utf-8" />
         <title>{% page_attribute "page_title" %}</title>
+
+        
         {% render_block "css" %}
     </head>
     <body>
         {% cms_toolbar %}
+        {% include "header.html" %}
+        {% placeholder "carousel" %}
         {% placeholder "content" %}
         {% render_block "js" %}
+
+         <!-- Javascript Files
+  ================================================== -->
+
+       
     </body>
 </html>

@@ -56,9 +56,9 @@ INSTALLED_APPS = [
     # some content plugins - optional, but used in most projects
     'djangocms_file',
     'djangocms_icon',
+    'djangocms_style',
     'djangocms_link',
     'djangocms_picture',
-    'djangocms_style',
     'djangocms_googlemap',
     'djangocms_video',
 
@@ -102,8 +102,9 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'backend', 'templates'),
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -117,7 +118,12 @@ TEMPLATES = [
 
                 'cms.context_processors.cms_settings',
                 'sekizai.context_processors.sekizai',
+                'django.template.context_processors.static',
 
+            ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader'
             ],
         },
     },
@@ -125,6 +131,7 @@ TEMPLATES = [
 
 CMS_TEMPLATES = [
     # a minimal template to get started with
+    ('page.html', 'Bootstrap 4 Demo'),
     ('minimal.html', 'Minimal template'),
     ('whitenoise-static-files-demo.html', 'Static File Demo'),
 
@@ -182,6 +189,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+THUMBNAIL_HIGH_RESOLUTION = True
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters'
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

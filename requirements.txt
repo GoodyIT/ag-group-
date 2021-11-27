@@ -178,6 +178,8 @@ wheel==0.37.0
 whitenoise==5.2.0
     # via -r requirements.in
 
+gunicorn==20.1.0
+
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
